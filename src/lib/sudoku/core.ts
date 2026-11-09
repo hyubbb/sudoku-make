@@ -1,10 +1,10 @@
 export type Board = number[];
-export type Difficulty = 'easy' | 'medium' | 'hard';
+export type Difficulty = 'easy' | 'medium' | 'hard' | 'super-hard';
 export type Paper = 'a7' | 'card-75x117' | 'card-65x100';
 export type Technique = 'naked-single' | 'hidden-single' | 'locked-candidate' | 'naked-pair' | 'hidden-pair' | 'x-wing';
 export type Item = { id: string; seed: string; puzzle: Board; solution: Board; difficulty: Difficulty; clueCount: number; techniques: Technique[] };
 export type Request = { seed: string; quantities: Record<Difficulty, number>; symmetry180: boolean; paper: Paper; title: string };
-export const VERSION = '1.0.0';
+export const VERSION = '2.0.0';
 export const groups: number[][] = [
   ...Array.from({length:9},(_,r)=>Array.from({length:9},(_,c)=>r*9+c)),
   ...Array.from({length:9},(_,c)=>Array.from({length:9},(_,r)=>r*9+c)),

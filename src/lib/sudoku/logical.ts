@@ -1,6 +1,6 @@
 import {groups,peers,valid,type Board,type Difficulty,type Technique} from './core';
 const bit=(n:number)=>1<<(n-1);const digits=(m:number)=>Array.from({length:9},(_,i)=>i+1).filter(n=>m&bit(n));
-const policies:Record<Difficulty,Technique[]>={easy:['naked-single','hidden-single'],medium:['naked-single','hidden-single','locked-candidate','naked-pair','hidden-pair'],hard:['naked-single','hidden-single','locked-candidate','naked-pair','hidden-pair','x-wing']};
+const policies:Record<Difficulty,Technique[]>={easy:['naked-single','hidden-single'],medium:['naked-single','hidden-single','locked-candidate'],hard:['naked-single','hidden-single','locked-candidate','naked-pair','hidden-pair'],'super-hard':['naked-single','hidden-single','locked-candidate','naked-pair','hidden-pair','x-wing']};
 export function solveLogical(input:Board,level:Difficulty){if(!valid(input))return {status:'contradiction' as const,techniques:[] as Technique[]};const board=[...input], masks=board.map((v,i)=>v?0:511&~peers[i].reduce((m,p)=>m|bit(board[p]||0),0)),used:Technique[]=[];const allowed=policies[level];
   const remove=(i:number,m:number)=>{const next=masks[i]&~m;if(next===masks[i])return false;masks[i]=next;return true};
   const place=(i:number,n:number,t:Technique)=>{board[i]=n;masks[i]=0;for(const p of peers[i])if(!board[p])remove(p,bit(n));used.push(t)};
@@ -23,4 +23,4 @@ export function solveLogical(input:Board,level:Difficulty){if(!valid(input))retu
   }
   return {status:'stuck' as const,techniques:used};
 }
-export function classify(board:Board):Difficulty|'unsupported'{for(const level of ['easy','medium','hard'] as const)if(solveLogical(board,level).status==='solved')return level;return 'unsupported'}
+export function classify(board:Board):Difficulty|'unsupported'{for(const level of ['easy','medium','hard','super-hard'] as const)if(solveLogical(board,level).status==='solved')return level;return 'unsupported'}

@@ -2,9 +2,9 @@
 import {useState} from 'react';
 import type {Board} from '../lib/sudoku/core';
 
-type Props={puzzle:Board;entries:Board;solution:Board;selected:number|null;checked:boolean;highlightMatches:boolean;highlightLines:boolean;onSelect:(cell:number)=>void;onInput:(digit:number,cell:number)=>void};
+type Props={notes:readonly (readonly number[])[];puzzle:Board;entries:Board;solution:Board;selected:number|null;checked:boolean;highlightMatches:boolean;highlightLines:boolean;onSelect:(cell:number)=>void;onInput:(digit:number,cell:number)=>void};
 
-export function PlayableGrid({puzzle,entries,solution,selected,checked,highlightMatches,highlightLines,onSelect,onInput}:Props){
+export function PlayableGrid({notes,puzzle,entries,solution,selected,checked,highlightMatches,highlightLines,onSelect,onInput}:Props){
   const [hovered,setHovered]=useState<number|null>(null);
   const active=hovered??selected;
   const activeValue=active===null?0:puzzle[active]||entries[active];
@@ -23,7 +23,7 @@ export function PlayableGrid({puzzle,entries,solution,selected,checked,highlight
         const next=(i+step[event.key]+81)%81;
         onSelect(next);
         event.currentTarget.parentElement?.querySelector<HTMLButtonElement>(`[data-cell="${next}"]`)?.focus();
-      }} key={i}>{value||''}</button>;
+      }} key={i}> {value||<span className="cell-notes" aria-label={`메모 ${notes[i].join(", ")}`} >{Array.from({length:9},(_,n)=><span key={n}>{notes[i].includes(n+1)?n+1:""}</span>)}</span>}</button>;
     })}
   </div>;
 }

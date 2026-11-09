@@ -25,3 +25,12 @@ npm run dev
 
 
 화면 정리는 Damir Sokolovsky의 [Unslop](https://heydamir.design/unslop) 가이드(CC BY 4.0)를 참고했습니다.
+
+## 난이도 기준 (v2)
+
+- 쉬움: Naked Single, Hidden Single
+- 보통: 쉬움 기법에 Locked Candidate 추가
+- 어려움: 보통 기법에 Naked Pair, Hidden Pair 추가
+- Super Hard: 어려움 기법에 X-Wing 추가
+
+낮은 단계의 기법만으로 풀리는 문제는 상위 단계에서 제외합니다. 주어진 숫자 수는 생성 목표일 뿐 최종 난이도는 논리 풀이로 검증합니다. 버전 변경에 따라 같은 시드의 생성 결과도 달라집니다.
