@@ -1,36 +1,25 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 스도쿠 노트 제작실
 
-## Getting Started
+Next.js App Router 기반 스도쿠 노트 생성기입니다. 시드로 문제를 생성하고, MRV와 독립 Exact Cover 검사로 유일해를 확인한 뒤 논리 풀이 정책으로 초급·중급·고급을 분류합니다. 검증을 통과한 문제만 미리보기와 PDF에 사용합니다.
 
-First, run the development server:
+## 실행
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+브라우저에서 `http://localhost:3000`을 엽니다. `npm test`, `npm run lint`, `npm run build`로 확인할 수 있습니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+문제를 생성한 뒤 **퍼즐 풀기**를 누르면 화면에서 빈칸을 선택해 숫자 버튼이나 키보드로 풀 수 있습니다. 방향키로 모든 칸을 이동하고 Delete 또는 Backspace로 입력한 숫자를 지울 수 있습니다. 선택하거나 마우스를 올린 칸의 가로·세로 줄과 같은 숫자 강조는 각각 켜고 끌 수 있습니다. 문제 아래에는 1~9의 채운 개수가 표시되고, 9칸을 채우면 완료 표시가 나옵니다. 이 표시는 정답 판정과 별개입니다. **정답 확인**은 틀린 칸과 남은 빈칸을 표시합니다. 다른 문제로 이동했다 돌아와도 입력이 유지되며, **다시 풀기**는 현재 문제의 입력만 지웁니다. PDF에는 풀이 중 입력한 숫자가 들어가지 않고, 문제 아래에 직접 표시할 수 있는 1~9 체크 원이 인쇄됩니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 판형
 
-## Learn More
+- A7: 재단 후 74 × 105mm
+- 노트형: 재단 후 75 × 117mm
+- 소형 카드형: 재단 후 65 × 100mm
 
-To learn more about Next.js, take a look at the following resources:
+인쇄용 PDF는 사방 3mm 도련과 바깥쪽 모서리 재단선용 5mm 여유를 포함합니다. 노트형 MediaBox는 91 × 133mm, 소형 카드형 MediaBox는 81 × 116mm입니다. 각 TrimBox는 선택한 완성 크기입니다. 일반 PDF는 재단 크기 그대로 출력합니다. PDF는 표지와 안내 면 없이 문제 01부터 시작합니다. 미리보기에서도 첫 문제는 단일 페이지로 표시합니다. 각 문제 면 다음에 해당 정답·메모 면이 오며, 한 페이지가 한 면입니다. 중철 면 배치는 포함하지 않습니다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+화면 정리는 Damir Sokolovsky의 [Unslop](https://heydamir.design/unslop) 가이드(CC BY 4.0)를 참고했습니다.
