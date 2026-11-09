@@ -13,7 +13,7 @@ export function PlayableGrid({puzzle,entries,solution,selected,checked,highlight
       const value=given||entries[i];
       const sameLine=highlightLines&&active!==null&&(Math.floor(active/9)===Math.floor(i/9)||active%9===i%9);
       const matching=highlightMatches&&activeValue!==0&&value===activeValue;
-      return <button type="button" className={`sudoku-cell ${given?'given':'editable'} ${sameLine?'related':''} ${selected===i?'selected':''} ${matching?'matching':''} ${checked&&!given&&value&&value!==solution[i]?'incorrect':''}`} data-cell={i} aria-label={`${Math.floor(i/9)+1}행 ${i%9+1}열, ${given?`주어진 숫자 ${given}`:value?`입력한 숫자 ${value}`:'빈칸'}`} onPointerEnter={()=>setHovered(i)} onClick={()=>onSelect(i)} onKeyDown={event=>{
+      return <button type="button" className={`sudoku-cell ${given?'given':'editable'} ${!given&&value?'entered':''} ${sameLine?'related':''} ${selected===i?'selected':''} ${matching?'matching':''} ${checked&&!given&&value&&value!==solution[i]?'incorrect':''}`} data-cell={i} aria-label={`${Math.floor(i/9)+1}행 ${i%9+1}열, ${given?`주어진 숫자 ${given}`:value?`입력한 숫자 ${value}`:'빈칸'}`} onPointerEnter={()=>setHovered(i)} onClick={()=>onSelect(i)} onKeyDown={event=>{
         setHovered(null);
         if(/^[1-9]$/.test(event.key)){event.preventDefault();onSelect(i);onInput(Number(event.key),i);return}
         if(['Backspace','Delete','0'].includes(event.key)){event.preventDefault();onSelect(i);onInput(0,i);return}
